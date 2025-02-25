@@ -1,4 +1,6 @@
 #include <iostream>
+#include <climits>
+#include <string>
 using namespace std;
 
 
@@ -10,13 +12,21 @@ class Stack{
     public:
         void pop();
         void push(int value);
-        void top();
+        int top();
+        int getIndex() {
+            return index;
+        }
         Stack();
+        ~Stack();
 };
 Stack::Stack(){
-    capacity = 10;
+    capacity = 20;
     data = new int[capacity];
     index = -1;
+}
+
+Stack::~Stack(){
+    delete[] data;
 }
 
 void Stack::pop(){
@@ -38,22 +48,36 @@ void Stack::push(int value) {
     }
 }
 
-void Stack::top() {
+int Stack::top() {
     if(index == -1) {
         cout << "Stack is empty" << endl;
-        return;
+        return INT_MAX;
     }else {
-        cout << data[index] << endl;
+        return data[index];
     }
+}
+
+bool checkParity(string str) {
+    Stack *stack = new Stack();
+    for(int i = 0; i< str.length();i++) {
+        if(str[i] == '(') {
+            stack->push(1);
+        }
+        if(str[i] == ')') {
+            if(stack->top() == INT_MAX) {
+                return false;
+            }
+           stack->pop();
+        }
+    }
+    return stack->getIndex() == -1;
 }
 
 int main() {
     Stack *stack = new Stack();
-    stack->push(1);
-    stack->push(5);
-    stack->push(10);
-    stack->pop();
-    stack->top();
+    string str = "((.)(.))";
+    cout << checkParity(str) << endl;
+
     return 0;
 }
 
