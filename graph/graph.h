@@ -9,6 +9,7 @@ private:
     public:
         int id;
         vector<Vertex*> neighbors;
+        int color = 0; // 0 = white, 1 = gray, 2 = black
 
         Vertex(int id){this->id = id;}
     };
@@ -18,4 +19,5 @@ private:
 public:
     void insert(int id);
     void insert(int id, vector<int> neighbors);
+    void bfs(int id);
 };

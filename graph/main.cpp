@@ -40,6 +40,7 @@ int main() {
     
     g.insert(10);
 
+    g.bfs(1);
 
     return 0;
 }

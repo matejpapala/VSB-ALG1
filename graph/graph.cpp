@@ -1,4 +1,6 @@
 #include "graph.h"
+#include <queue>
+#include <iostream>
 
 Graph::Vertex* Graph::findVertex(int id) {
 
@@ -37,3 +39,28 @@ void Graph::insert(int id, vector<int> neighborIDs) {
 
 }
 
+void Graph::bfs(int id) {
+    Vertex* startVertex = findVertex(id);
+    queue<Vertex*> que;
+
+    que.push(startVertex);
+    startVertex->color = 1;
+
+    while(!que.empty()) {
+        Vertex* currentVertex = que.front();
+        que.pop();
+
+
+        cout << currentVertex->id << endl;
+        currentVertex->color = 2;
+
+        for(auto neighbor : currentVertex->neighbors) {
+            if(neighbor->color == 0) {
+                que.push(neighbor);
+                neighbor->color = 1;  
+            }
+        }    
+    }
+
+    
+}
