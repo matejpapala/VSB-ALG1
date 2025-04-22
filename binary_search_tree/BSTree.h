@@ -19,4 +19,6 @@ public:
     int knotsCount(Node* root);
     Node* getRoot() { return this->root; }
     void sortedPrint(Node* root);
+    int treeHeight(Node* root);
+    bool isBalanced(Node* root);
 };

@@ -34,3 +34,19 @@ void BSTree::sortedPrint(Node* root) {
     cout << root->value << " ";
     sortedPrint(root->right);
 }
+
+int BSTree::treeHeight(Node* root) {
+    if(root == nullptr) {
+        return 0;
+    }
+    return 1 + max(treeHeight(root->left), treeHeight(root->right));
+}
+
+bool BSTree::isBalanced(Node* root) {
+    if(root == nullptr) {
+        return true;
+    }
+    int leftHeight = treeHeight(root->left);
+    int rightHeight = treeHeight(root->right);
+    return abs(leftHeight - rightHeight) <= 1 && isBalanced(root->left) && isBalanced(root->right);
+}
