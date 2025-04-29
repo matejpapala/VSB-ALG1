@@ -30,6 +30,21 @@ bool binarySearch(int* arr, int size, int target) {
     return false;
 }
 
+bool binarySearchRecursive(int* arr, int size, int target) {
+    if(size == 0) {
+        return false;
+    }
+    int middle = size / 2;
+    if(arr[middle] == target) {
+        return true;
+    }
+    if(arr[middle] < target) {
+        return binarySearchRecursive(arr + middle + 1, size - middle - 1, target);
+    } else {
+        return binarySearchRecursive(arr, middle, target);
+    }
+}
+
 bool isSorted(int* arr, int size) {
     for(int i = 0;i < size;i++) {
         if(arr[i] > arr[i + 1]) {
@@ -40,7 +55,6 @@ bool isSorted(int* arr, int size) {
 }
 
 int main() {
-
     int arr[] = {5, 2, 4, 1, 3, 9, 10, 8, 7, 6};
     int size = 10;
     cout << "Before sorting: ";
@@ -48,11 +62,14 @@ int main() {
         cout << arr[i] << " ";
     }
     insertionSort(arr, size);
+    cout << endl;
     cout << "After sorting: ";
     for(int i = 0;i < size;i++) {
         cout << arr[i] << " ";
     }
     cout << endl;
-    cout << (binarySearch(arr, size, 33) ? "Found" : "Not found");
+    cout << (binarySearch(arr, size, 6) ? "Found" : "Not found");
+    cout << endl;
+    cout << (binarySearchRecursive(arr, size, 9) ? "Found" : "Not found");
     return 0;
 }
